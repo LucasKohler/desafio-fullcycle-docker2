@@ -1,0 +1,52 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=nodedb
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - db
+    ports:
+      - "3306:3306"
+    restart: always
+  app:
+    build:
+      context: ./app
+    container_name: app
+    volumes:
+      - ./app:/usr/src/app
+    depends_on:
+      - mysql
+    restart: always
+    tty: true
+    ports:
+      - "3000:3000"
+    networks:
+      - db
+      - server
+    environment:
+      - PORT=3000
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=nodedb  
+  web_server:
+    build:
+      context: ./server
+    depends_on:
+      - app
+    container_name: web_server
+    tty: true
+    ports:
+      - "8080:80"
+    networks:
+      - server
+networks:
+  db:
+    driver: bridge
+  server:
+    driver: bridge

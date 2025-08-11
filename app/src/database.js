@@ -48,7 +48,7 @@ class Database {
     try {
       const hasUsersAlready = await this.hasUsers();
       if (!hasUsersAlready) {
-        await this.insertUser({ name: "Rodolfo" });
+        await this.insertUser({ name: "Lucas" });
         console.log("Usuário padrão 'Rodolfo' adicionado com sucesso.");
       } else {
         console.log("Banco de dados já tem usuários. Sem necessidade de seed.");

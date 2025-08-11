@@ -6,13 +6,7 @@ Ao acessar o nginx na porta 8080, ele deve fazer uma chamada à aplicação Node
 
 #### Validação
 
-Para executar, navegue até o diretório:
-
-```bash
-cd ./docker/1.2-reverse-proxy
-```
-
-E então:
+Para executar, rode o comando a baixo:
 
 ```bash
 docker-compose up -d
